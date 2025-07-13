@@ -49,7 +49,7 @@ clients:
       disableBackoffCaps: false
     reads:
       network: tcp
-      address: read-postgres:5433
+      address: read-postgres:5432
       tcpKeepAlive: False
       tcpKeepAlivePeriod: 30s # duration
       receiveChunkSize: 8192
