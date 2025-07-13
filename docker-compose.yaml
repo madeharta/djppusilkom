@@ -21,13 +21,6 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
-  #redis:
-  #  image: redis:latest
-  #  healthcheck:
-  #    test: ["CMD", "redis-cli", "ping"]
-  #    interval: 5s
-  #    timeout: 5s
-  #    retries: 5
   gatewayd:
     image: gatewaydio/gatewayd:latest
     container_name: gatewayd
@@ -36,8 +29,6 @@ services:
         "run",
         "--config",
         "/opt/gatewayd-modif.yaml",
-        #"--plugin-config",
-        #"/gatewayd-files/gatewayd_plugins.yaml",
         "--tracing",
         "--collector-url",
         "tempo:4317",
@@ -67,7 +58,6 @@ services:
     links:
       - write-postgres
       - read-postgres
-      #- redis
     healthcheck:
       test: ["CMD", "curl", "-f", "http://gatewayd:18080/healthz"]
       interval: 5s
@@ -78,8 +68,5 @@ services:
         condition: service_healthy
       read-postgres:
         condition: service_healthy
-      #redis:
-      #  condition: service_healthy
-      #install_plugins:
-      #  condition: service_completed_successfully
+        
 
